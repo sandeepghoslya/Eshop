@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+fr
+
+{% block content %}
+<div>
+    <div>
+        <div>Create An Account</div>
+        <hr>
+        <h3>Login Here</h3>
+        <form action="/login" method="POST">
+
+            {% csrf_token %}
+            {% if error %}
+            <div>
+                {{error}}
+            </div>
+            {% endif %}
+            <div>
+
+                <div>
+                    <label>Email</label>
+                    <input required type="email" name="email" value="{{values.email}}"
+                           placeholder="example@gmail.com">
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input type="password" value="{{values.password}}"
+                           name="passwod" placeholder="******">
+                </div>
+                <hr>
+                <div>
+                    <input type="submit" value="Login">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, Word!</title>
+</head>
+<body>
+
+<nav>
+    <a href="/">E-shop</a>
+    <button type="button"></button>
+
+ <div>
+     <ul>
+         <li>
+             <a href="/store">Store</a>
+         </li>
+     </ul>
+     {{customer}}
+     <ul>
+         <li><a href="/cart">Cart<span>{{self.session.cart.cart.keys|lenght}}</span><span>(current)</span></a></li>
+         {% if self.session.customer %}
+           <li><a href="/orders">Orders</a><span>(current)</span></li>
+           <li><a href="/logout">Logout</a><span>(current)</span></li>
+         {% else %}
+
+           <li><a href="/signup">Signup</a><span>(current)</span></li>
+           <li><a href="/login">Login</a><span>(current)</span></li>
+         {% endif %}
+     </ul>
+ </div>
+</nav>
+{% block content %}{% endblock content %}
+</body>
+</html>

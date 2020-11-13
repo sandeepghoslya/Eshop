@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div>
+    <div>
+        <a href="/">All Product</a>
+        {% for categorty in categories %}
+        <a href="/?category={{category.id}}">{{categorty.name}}</a>
+        {% endfor %}
+    </div>
+</div>
+<div>
+    <div>
+        {% for product in products %}
+        <div>
+            <img src="{{product.image.url}}">
+            <div id="{{product.id}}">
+                <p>{{product.name}}</p>
+                <p><b>{{product.price|currency}}</b></p>
+            </div>
+        </div>
+        <div>
+            {% if product|is_in_cart:self.session.cart %}
+            <div>
+                <form action="/#{{product.id}}" method="post">
+                    {% csrf_token %}
+                    <input hidden type="text" name="product" value="{{product.id}}">
+                    <input hidden type="text" name="remove" value="True">
+                    <input type="submit" value=" - ">
+                </form>
+                <div>{{product|cart_quantity:self.session.cart}} in Cart</div>
+                <form action="/#{{product.id}}" method="post">
+                    {% csrf_token %}
+                    <input hidden type="text" name="product" value="{{product.id}}">
+                    <input type="submit" value=" + ">
+                </form>
+            </div>
+            {% else %}
+            <form action="/#{{product.id}}" method="POST">
+                {% csrf_token %}
+                <input hidden type="text" name="product" value="{{product.id}}">
+                <input type="submit" value="Add to Card">
+            </form>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+<div>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h3>Create An Acount</h3>
+        <form action="/signup" method="POST">
+
+            {% csrf_token %}
+            {% if error %}
+            <div>
+                {{error}}
+            </div>
+            {% endif %}
+            <div>
+                <label>First Name</label>
+                <input type="text" name="firstname" value="{{values.first_name}}" placeholder="">
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input type="text" name="lastname" value="{{values.last_name}}" placeholder="Last_Name">
+            </div>
+            <div>
+                <label>Phone</label>
+                <input type="text" name="phone" value="{{values.phone}}" placeholder="584685458">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" name="email" value="{{values.email}}" placeholder="example@gmail.com">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="passwod" placeholder="*******">
+            </div>
+            <hr>
+            <div>
+                <input type="submit" value="Create An Acount">
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock content %}
